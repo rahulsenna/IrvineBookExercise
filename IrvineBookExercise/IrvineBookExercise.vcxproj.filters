@@ -15,10 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <MASM Include="3_5_5_Section_Review.asm">
-      <Filter>Source Files</Filter>
-    </MASM>
-    <MASM Include="3_10_Programming_Exercises.asm">
+    <MASM Include="3_10_Programming_Exercises_64bit_Add_Var.asm">
       <Filter>Source Files</Filter>
     </MASM>
   </ItemGroup>

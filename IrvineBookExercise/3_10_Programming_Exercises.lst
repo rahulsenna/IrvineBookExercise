@@ -1,0 +1,193 @@
+Microsoft (R) Macro Assembler Version 14.36.32534.0	    07/20/23 00:26:41
+3_10_Programming_Exercises.asm				     Page 1 - 1
+
+
+				.386
+				.model flat,stdcall
+				.stack 4096
+				ExitProcess PROTO, dwExitCode:DWORD
+
+
+ 00000000			.DATA
+
+				; *2. Symbolic Integer Constant
+ = 00000000			SUNDAY		=		0
+ = 00000001			MONDAY		=		1
+ = 00000002			TUESDAY		=		2
+ = 00000003			WEDNESDAY	=		3
+ = 00000004			THURSDAY	=		4
+ = 00000005			FRIDAY		=		5
+ = 00000006			SATURDAY	=		6
+
+ 00000000 00 01 02 03 04	WEEK		BYTE	SUNDAY,MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY
+	   05 06
+ 00000007 = 00000007		WEEKDAYS	=	($ - WEEK)
+				; *2. Symbolic Integer Constant END
+
+
+				; *3. Data Definitions
+					
+ 00000007 FF			largest8bitUnsingedInt 		BYTE 	0FFh		;	255 in decimal
+ 00000008 7F			largest8bitSingedInt 		SBYTE 	07Fh 		;	127 in decimal
+ 00000009 80			smallest8bitSingedInt 		SBYTE 	080h    	;  -128 in decimal
+
+ 0000000A FFFF			largest16bitUnsingedInt 	WORD 	0FFFFh  	;	65535 in decimal
+ 0000000C 7FFF			largest16bitSingedInt 		SWORD 	07FFFh 		;  	32767
+ 0000000E 8000			smallest16bitSingedInt 		SWORD 	08000h 		;  -32768
+
+
+ 00000010 FFFFFFFF		largest32bitUnsingedInt 	DWORD 	0FFFFFFFFh  ;	4,294,967,296 in decimal
+ 00000014 7FFFFFFF		largest32bitSingedInt 		SDWORD 	07FFFFFFFh  ;  	2,147,483,647
+ 00000018 80000000		smallest32bitSingedInt 		SDWORD 	080000000h  ;  -2,147,483,648
+
+
+ 0000001C			largest64bitUnsingedInt 	QWORD 	0FFFFFFFFFFFFFFFFh  ;	18,446,744,073,709,551,615 in decimal
+	   FFFFFFFFFFFFFFFF
+ 00000024			largest64bitSingedInt 		SQWORD 	07FFFFFFFFFFFFFFFh  ;  	9,223,372,036,854,775,807
+	   7FFFFFFFFFFFFFFF
+ 0000002C			smallest64bitSingedInt 		SQWORD 	08000000000000000h  ;  -9,223,372,036,854,775,808
+	   8000000000000000
+
+
+
+ 00000034 FFFFFFFFFFFF		largest48bitUnsingedInt 	FWORD 	0FFFFFFFFFFFFh  	;	281,474,976,710,655 in decimal
+
+ 0000003A			packedBCD_VAL 				TBYTE 	080000000000000001234h ;
+	   80000000000000001234
+ 00000044			posVal						REAL8	1.5
+	   3FF8000000000000
+ 0000004C			bcdVal						TBYTE	?
+	   00000000000000000000
+
+ 00000056 BF99999A		rVal1						REAL4	-1.2
+ 0000005A			rVal2						REAL8	3.2E-260
+	   0A0F7D228322BAF5
+ 00000062			rVal3						REAL10	4.6E+4096
+	   7527E1D52B1C853F14BF
+				; *3. Data Definitions END
+
+				; *4. Symbolic Text Constant
+
+ = "Hello World!",0		Greeting		EQU		"Hello World!",0
+ = "Hello Assembler",0ah,0d	Greeting2		EQU		<"Hello Assembler!",0ah,0dh,0>
+   h,0
+ = "Hello Sailor",0ah,0dh,0	Greeting3		TEXTEQU	<"Hello Sailor!",0ah,0dh,0>
+
+ 0000006C 48 65 6C 6C 6F	helloWorldString	BYTE	Greeting
+	   20 57 6F 72 6C
+	   64 21 00
+ 00000079 48 65 6C 6C 6F	helloSailorString	BYTE	Greeting3
+	   20 53 61 69 6C
+	   6F 72 0A 0D 00
+
+				; *4. Symbolic Text Constant END
+
+
+ 00000000			.CODE
+ 00000000			main PROC
+
+				; *1. Interger Expression Calculation
+ 00000088			.DATA
+ = 00000035				A		=		53
+ = 00000020				B		=		32
+ = 00000061				C_VAL	=		97
+ = 00000017				D		=		23
+ =-00000023				answer	EQU		(A+B) - (C_VAL+D)
+ 00000000			.CODE
+ 00000000  B8 00000035			mov		EAX,A
+ 00000005  BB 00000020			mov		EBX,B
+ 0000000A  B9 00000061			mov		ECX,C_VAL
+ 0000000F  BA 00000017			mov		EDX,D
+ 00000014  03 C3			add		EAX,EBX
+ 00000016  03 CA			add		ECX,EDX
+ 00000018  2B C1			sub		EAX,ECX
+ 0000001A  BE FFFFFFDD			mov		ESI,answer
+				; *1. Interger Expression Calculation END
+ 0000001F  DD 05 00000044 R		fld		posVal
+ 00000025  DF 35 0000004C R		fbstp	bcdVal
+ 0000002B  BF 00000007			MOV		EDI,WEEKDAYS
+
+ 00000030  8D 05 00000079 R		lea		eax, helloSailorString
+					
+					INVOKE	ExitProcess,0
+
+ 0000003D			main ENDP
+				END main
+Microsoft (R) Macro Assembler Version 14.36.32534.0	    07/20/23 00:26:41
+3_10_Programming_Exercises.asm				     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 DWord	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000088 DWord	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000003D DWord	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+ExitProcess  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000003D Public STDCALL
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000003h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+A  . . . . . . . . . . . . . . .	Number	 00000035h   
+B  . . . . . . . . . . . . . . .	Number	 00000020h   
+C_VAL  . . . . . . . . . . . . .	Number	 00000061h   
+D  . . . . . . . . . . . . . . .	Number	 00000017h   
+FRIDAY . . . . . . . . . . . . .	Number	 00000005h   
+Greeting2  . . . . . . . . . . .	Text   	 "Hello Assembler",0ah,0dh,0
+Greeting3  . . . . . . . . . . .	Text   	 "Hello Sailor",0ah,0dh,0
+Greeting . . . . . . . . . . . .	Text   	 "Hello World!",0
+MONDAY . . . . . . . . . . . . .	Number	 00000001h   
+SATURDAY . . . . . . . . . . . .	Number	 00000006h   
+SUNDAY . . . . . . . . . . . . .	Number	 00000000h   
+THURSDAY . . . . . . . . . . . .	Number	 00000004h   
+TUESDAY  . . . . . . . . . . . .	Number	 00000002h   
+WEDNESDAY  . . . . . . . . . . .	Number	 00000003h   
+WEEKDAYS . . . . . . . . . . . .	Number	 00000007h   
+WEEK . . . . . . . . . . . . . .	Byte	 00000000 _DATA	
+answer . . . . . . . . . . . . .	Number	 -00000023h   
+bcdVal . . . . . . . . . . . . .	TByte	 0000004C _DATA	
+helloSailorString  . . . . . . .	Byte	 00000079 _DATA	
+helloWorldString . . . . . . . .	Byte	 0000006C _DATA	
+largest16bitSingedInt  . . . . .	Word	 0000000C _DATA	
+largest16bitUnsingedInt  . . . .	Word	 0000000A _DATA	
+largest32bitSingedInt  . . . . .	DWord	 00000014 _DATA	
+largest32bitUnsingedInt  . . . .	DWord	 00000010 _DATA	
+largest48bitUnsingedInt  . . . .	FWord	 00000034 _DATA	
+largest64bitSingedInt  . . . . .	QWord	 00000024 _DATA	
+largest64bitUnsingedInt  . . . .	QWord	 0000001C _DATA	
+largest8bitSingedInt . . . . . .	Byte	 00000008 _DATA	
+largest8bitUnsingedInt . . . . .	Byte	 00000007 _DATA	
+packedBCD_VAL  . . . . . . . . .	TByte	 0000003A _DATA	
+posVal . . . . . . . . . . . . .	QWord	 00000044 _DATA	
+rVal1  . . . . . . . . . . . . .	DWord	 00000056 _DATA	
+rVal2  . . . . . . . . . . . . .	QWord	 0000005A _DATA	
+rVal3  . . . . . . . . . . . . .	TByte	 00000062 _DATA	
+smallest16bitSingedInt . . . . .	Word	 0000000E _DATA	
+smallest32bitSingedInt . . . . .	DWord	 00000018 _DATA	
+smallest64bitSingedInt . . . . .	QWord	 0000002C _DATA	
+smallest8bitSingedInt  . . . . .	Byte	 00000009 _DATA	
+
+	   0 Warnings
+	   0 Errors
