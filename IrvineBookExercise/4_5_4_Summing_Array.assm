@@ -1,0 +1,32 @@
+;	Summing an Interger Array
+
+.386
+.model	flat,stdcall
+.stack	4096
+
+ExitProcess		PROTO,dwExitCode:DWORD
+
+.DATA	
+
+	myArray				DWORD	1,2,3,4,5,6,7,8,9
+	sumOfIntsInArray	DWORD	?
+
+.CODE
+
+main	PROC
+	
+	mov		esi, OFFSET myArray
+	mov		ecx, LENGTHOF myArray
+	xor		eax,eax
+L1:
+	add		eax,[esi]
+	add		esi,TYPE myArray
+	LOOP	L1
+
+	mov		sumOfIntsInArray,eax
+
+	INVOKE	ExitProcess,0	
+
+main	ENDP
+
+END		main
