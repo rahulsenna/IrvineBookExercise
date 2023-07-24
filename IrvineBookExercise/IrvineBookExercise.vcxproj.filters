@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <MASM Include="4_4_4_Pointers.asm">
+    <MASM Include="4_6_2_Sum_Array_64_Bit.asm">
       <Filter>Source Files</Filter>
     </MASM>
   </ItemGroup>

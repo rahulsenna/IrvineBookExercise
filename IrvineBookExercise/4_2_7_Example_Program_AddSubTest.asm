@@ -14,7 +14,7 @@ ExitProcess 	PROTO,dwExitCode:DWORD
 	a	byte	11000000b
 	b	byte	11000001b
 COMMENT !
-	How the Hardware Detects Overflow
+	*** How the Hardware Detects Overflow ***
 
 	OverFlowFlag = CarryFlag ^ CarryInBit
 	---------------------------------------------------------
