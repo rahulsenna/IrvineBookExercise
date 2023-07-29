@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <MASM Include="4_6_2_Sum_Array_64_Bit.asm">
+    <MASM Include="5_4_4_Library_Test_Programs_2_Performance_Timing.asm">
       <Filter>Source Files</Filter>
     </MASM>
   </ItemGroup>
