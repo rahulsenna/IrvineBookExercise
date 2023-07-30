@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <MASM Include="5_4_4_Library_Test_Programs_2_Performance_Timing.asm">
+    <MASM Include="5_9_Programming_Exercises.asm">
       <Filter>Source Files</Filter>
     </MASM>
   </ItemGroup>

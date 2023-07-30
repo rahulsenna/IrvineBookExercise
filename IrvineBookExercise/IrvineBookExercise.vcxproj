@@ -19,10 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <MASM Include="5_5_4_CallProc_64.asm" />
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="..\..\..\..\Desktop\Irvine\Irvine64.obj" />
+    <MASM Include="5_9_Programming_Exercises.asm" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -101,7 +98,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EntryPointSymbol>main</EntryPointSymbol>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);Irvine32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
