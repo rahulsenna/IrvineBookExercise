@@ -84,9 +84,9 @@ main	PROC
 	mov		ebx,2						; K = 2
 	mov		ecx,50						; 50 elements
 	mov		esi, OFFSET kArr			
-	call	MultiplesOfK				; * 10th Problem
+	call	MultiplesOfK				; * 11th Problem
 	mov		ebx,3						; K = 3
-	call	MultiplesOfK				; * 10th Problem
+	call	MultiplesOfK				; * 11th Problem
 
 
 

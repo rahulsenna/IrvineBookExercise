@@ -19,7 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <MASM Include="6_11_Programming_Exercises.asm" />
+    <MASM Include="7_10_Programming_Exercises.asm">
+      <GeneratePreprocessedSourceListing Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</GeneratePreprocessedSourceListing>
+      <EnableAssemblyGeneratedCodeListing Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</EnableAssemblyGeneratedCodeListing>
+      <AssembledCodeListingFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(DefiningProjectDirectory)%(Filename).lst</AssembledCodeListingFile>
+      <ListAllAvailableInformation Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ListAllAvailableInformation>
+    </MASM>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
