@@ -13,9 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="NewFilter1">
+      <UniqueIdentifier>{5de9a734-c478-4ef6-bd01-cf2bc5cc618d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <MASM Include="7_10_Programming_Exercises.asm">
+    <MASM Include="8_11_Programming_Exercises\ShowParams.asm">
       <Filter>Source Files</Filter>
     </MASM>
   </ItemGroup>

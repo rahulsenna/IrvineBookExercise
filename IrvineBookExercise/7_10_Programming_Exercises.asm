@@ -149,16 +149,16 @@ WriteScaled PROC USES edx ecx ebx
 	add		esi,ecx
 	sub		esi,ebx
 	mov		al, BYTE PTR [esi]
-	mov		BYTE PTR [esi],0
+	mov		BYTE PTR [esi],0				; null terminating right where the decimal point is.
 	call	WriteString
 
-	mov		BYTE PTR [esi],al
+	mov		BYTE PTR [esi],al				; retrieving the character back
 	
 	mov		al,'.'
 	call	WriteChar
 	
 	mov		edx,esi
-	call	WriteString
+	call	WriteString						; printing rest to the numbers(after decimal point)
 
 	ret
 WriteScaled ENDP

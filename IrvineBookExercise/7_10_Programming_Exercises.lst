@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.36.32534.0	    08/19/23 16:31:31
+Microsoft (R) Macro Assembler Version 14.36.32534.0	    10/23/23 14:26:28
 7_10_Programming_Exercises.asm				     Page 1 - 1
 
 
@@ -104,127 +104,142 @@ Microsoft (R) Macro Assembler Version 14.36.32534.0	    08/19/23 16:31:31
  00000000			.CODE
  00000000			main PROC
 
+ 00000000  33 C0		xor eax,eax
+ 00000002  B0 FB		mov al,-5
+ 00000004  B3 05		mov bl, 5
+ 00000006  B1 01		mov cl, 1
+ 00000008  B2 FF		mov dl, -1
+
+
+ 0000000A  3C 00		cmp al, 0
+ 0000000C  80 FB 00		cmp bl, 0
+ 0000000F  80 F9 00		cmp cl,0
+ 00000012  80 FA 00		cmp dl,0
+ 00000015  B0 00		mov al,0
+ 00000017  3C 00		cmp al,0
+
+
 				;---------------------------------------------------------------
 				; 1. Display ASCII Decimal 
 
- 00000000  BA 00000000 R		mov		edx, OFFSET decimal_one
- 00000005  B9 00000010			mov		ecx, LENGTHOF decimal_one
- 0000000A  BB 00000005			mov 	ebx, DECIMAL_OFFSET
- 0000000F  E8 000000C5			call	WriteScaled
+ 00000019  BA 00000000 R		mov		edx, OFFSET decimal_one
+ 0000001E  B9 00000010			mov		ecx, LENGTHOF decimal_one
+ 00000023  BB 00000005			mov 	ebx, DECIMAL_OFFSET
+ 00000028  E8 000000C5			call	WriteScaled
 
 				;---------------------------------------------------------------
 				; 2. Extended Subtraction Procedure
 
- 00000014  BE 00000010 R		mov		esi,OFFSET op1					; first operand
- 00000019  BF 00000018 R		mov		edi,OFFSET op2					; second operand
- 0000001E  BB 00000020 R		mov		ebx,OFFSET difference			; difference operand
- 00000023  B9 00000002			mov		ecx,SIZE op1 / TYPE DWORD		; number of bytes
- 00000028  E8 000000D3			call	Extended_Sub
+ 0000002D  BE 00000010 R		mov		esi,OFFSET op1					; first operand
+ 00000032  BF 00000018 R		mov		edi,OFFSET op2					; second operand
+ 00000037  BB 00000020 R		mov		ebx,OFFSET difference			; difference operand
+ 0000003C  B9 00000002			mov		ecx,SIZE op1 / TYPE DWORD		; number of bytes
+ 00000041  E8 000000D3			call	Extended_Sub
 					
 				;---------------------------------------------------------------
 				; 3. Packed Decimal Conversion
 
- 0000002D  BA 0000003C R		mov		edx, OFFSET ascii_buf
+ 00000046  BA 0000003C R		mov		edx, OFFSET ascii_buf
 					
- 00000032  A1 00000030 R		mov		eax,bcd1
- 00000037  E8 000000E4			call	PackedToAsc
- 0000003C  E8 00000000 E		call	Crlf
- 00000041  E8 00000000 E		call	WriteString
+ 0000004B  A1 00000030 R		mov		eax,bcd1
+ 00000050  E8 000000E4			call	PackedToAsc
+ 00000055  E8 00000000 E		call	Crlf
+ 0000005A  E8 00000000 E		call	WriteString
 
- 00000046  A1 00000034 R		mov		eax,bcd2
- 0000004B  E8 000000D0			call	PackedToAsc
- 00000050  E8 00000000 E		call	Crlf
- 00000055  E8 00000000 E		call	WriteString
+ 0000005F  A1 00000034 R		mov		eax,bcd2
+ 00000064  E8 000000D0			call	PackedToAsc
+ 00000069  E8 00000000 E		call	Crlf
+ 0000006E  E8 00000000 E		call	WriteString
 
- 0000005A  A1 00000038 R		mov		eax,bcd3
- 0000005F  E8 000000BC			call	PackedToAsc
- 00000064  E8 00000000 E		call	Crlf
- 00000069  E8 00000000 E		call	WriteString
+ 00000073  A1 00000038 R		mov		eax,bcd3
+ 00000078  E8 000000BC			call	PackedToAsc
+ 0000007D  E8 00000000 E		call	Crlf
+ 00000082  E8 00000000 E		call	WriteString
 
 				;---------------------------------------------------------------
 				; 4. Encryption Using Rotate Operations
 
- 0000006E  BB 00000045 R		mov		ebx,OFFSET key
- 00000073  BA 0000004F R		mov		edx,OFFSET msg1
- 00000078  B9 0000002E			mov		ecx,SIZEOF msg1
- 0000007D  E8 000000B6			call	EncryptMsg
- 00000082  E8 000000B1			call	EncryptMsg
+ 00000087  BB 00000045 R		mov		ebx,OFFSET key
+ 0000008C  BA 0000004F R		mov		edx,OFFSET msg1
+ 00000091  B9 0000002E			mov		ecx,SIZEOF msg1
+ 00000096  E8 000000B6			call	EncryptMsg
+ 0000009B  E8 000000B1			call	EncryptMsg
 
 
 				;---------------------------------------------------------------
 				; 5. Prime Numbers
 					
- 00000087  BE 0000007D R		mov		esi, OFFSET prime
- 0000008C  E8 000000D5			call	GeneratePrimeNumbers
+ 000000A0  BE 0000007D R		mov		esi, OFFSET prime
+ 000000A5  E8 000000D5			call	GeneratePrimeNumbers
 
 				;---------------------------------------------------------------
 				; 6. Greatest Common Divisor (GCD)
 
- 00000091  BE 00000006			mov     esi,6
- 00000096  BF 0000000C			mov		edi,12
- 0000009B  E8 0000010F			call	GCD
+ 000000AA  BE 00000006			mov     esi,6
+ 000000AF  BF 0000000C			mov		edi,12
+ 000000B4  E8 0000010F			call	GCD
 
 				;---------------------------------------------------------------
 				; 7. Bitwise Multiplication
 
 
- 000000A0  B8 00000234			mov		eax, 564
- 000000A5  BB 0000037E			mov		ebx, 894
+ 000000B9  B8 00000234			mov		eax, 564
+ 000000BE  BB 0000037E			mov		ebx, 894
 					
- 000000AA  B8 00000002			mov		eax, 2
- 000000AF  BB 00000007			mov		ebx, 7
- 000000B4  E8 00000160			call	BitwiseMultiply2
+ 000000C3  B8 00000002			mov		eax, 2
+ 000000C8  BB 00000007			mov		ebx, 7
+ 000000CD  E8 00000160			call	BitwiseMultiply2
 
 				;---------------------------------------------------------------
 				; 8. Add Packed Integers
 					
- 000000B9  BA 0000049F R		mov		edx,OFFSET packed_sum
- 000000BE  B9 00000010			mov		ecx,SIZEOF packed_5
- 000000C3  BE 0000047F R		mov		esi,OFFSET packed_5
- 000000C8  BF 0000048F R		mov		edi,OFFSET packed_6
+ 000000D2  BA 0000049F R		mov		edx,OFFSET packed_sum
+ 000000D7  B9 00000010			mov		ecx,SIZEOF packed_5
+ 000000DC  BE 0000047F R		mov		esi,OFFSET packed_5
+ 000000E1  BF 0000048F R		mov		edi,OFFSET packed_6
 
- 000000CD  E8 00000185			call	AddPacked
+ 000000E6  E8 00000185			call	AddPacked
 
 					exit
- 000000D2  6A 00	   *	    push   +000000000h
- 000000D4  E8 00000000 E   *	    call   ExitProcess
- 000000D9			main ENDP
+ 000000EB  6A 00	   *	    push   +000000000h
+ 000000ED  E8 00000000 E   *	    call   ExitProcess
+ 000000F2			main ENDP
 
 
 				;-----------------------------------------------------------------
- 000000D9			WriteScaled PROC USES edx ecx ebx
+ 000000F2			WriteScaled PROC USES edx ecx ebx
 				;	Prints a decimal ASCII number with decimal point.
 				;	receives	EDX=Offset to num,ECX=Length of num, EBX=Offset to decimal point from right
 				;	returns		Nothing
 				;-----------------------------------------------------------------
- 000000D9  52		   *	    push   edx
- 000000DA  51		   *	    push   ecx
- 000000DB  53		   *	    push   ebx
- 000000DC  8B F2			mov		esi,edx
- 000000DE  03 F1			add		esi,ecx
- 000000E0  2B F3			sub		esi,ebx
- 000000E2  8A 06			mov		al, BYTE PTR [esi]
- 000000E4  C6 06 00			mov		BYTE PTR [esi],0
- 000000E7  E8 00000000 E		call	WriteString
+ 000000F2  52		   *	    push   edx
+ 000000F3  51		   *	    push   ecx
+ 000000F4  53		   *	    push   ebx
+ 000000F5  8B F2			mov		esi,edx
+ 000000F7  03 F1			add		esi,ecx
+ 000000F9  2B F3			sub		esi,ebx
+ 000000FB  8A 06			mov		al, BYTE PTR [esi]
+ 000000FD  C6 06 00			mov		BYTE PTR [esi],0				; null terminating right where the decimal point is.
+ 00000100  E8 00000000 E		call	WriteString
 
- 000000EC  88 06			mov		BYTE PTR [esi],al
+ 00000105  88 06			mov		BYTE PTR [esi],al				; retrieving the character back
 					
- 000000EE  B0 2E			mov		al,'.'
- 000000F0  E8 00000000 E		call	WriteChar
+ 00000107  B0 2E			mov		al,'.'
+ 00000109  E8 00000000 E		call	WriteChar
 					
- 000000F5  8B D6			mov		edx,esi
- 000000F7  E8 00000000 E		call	WriteString
+ 0000010E  8B D6			mov		edx,esi
+ 00000110  E8 00000000 E		call	WriteString						; printing rest to the numbers(after decimal point)
 
 					ret
- 000000FC  5B		   *	    pop    ebx
- 000000FD  59		   *	    pop    ecx
- 000000FE  5A		   *	    pop    edx
- 000000FF  C3		   *	    ret    00000h
- 00000100			WriteScaled ENDP
+ 00000115  5B		   *	    pop    ebx
+ 00000116  59		   *	    pop    ecx
+ 00000117  5A		   *	    pop    edx
+ 00000118  C3		   *	    ret    00000h
+ 00000119			WriteScaled ENDP
 
 
 				;--------------------------------------------------------
- 00000100			Extended_Sub PROC
+ 00000119			Extended_Sub PROC
 				;
 				; Calculates the difference of two extended integers stored
 				; as arrays of DWORDS.
@@ -235,28 +250,28 @@ Microsoft (R) Macro Assembler Version 14.36.32534.0	    08/19/23 16:31:31
 				; input operands.
 				; Returns: nothing
 				;--------------------------------------------------------
- 00000100  60				pushad
- 00000101  F8				clc ; clear the Carry flag
+ 00000119  60				pushad
+ 0000011A  F8				clc ; clear the Carry flag
 
- 00000102			L1:
- 00000102  8B 06			mov		eax,[esi]						; get the first integer
- 00000104  1B 07			sbb		eax,[edi]						; subtract the second integer
- 00000106  9C				pushfd									; save carry flag
- 00000107  88 03			mov		[ebx],al						; store partial difference
- 00000109  83 C6 04			add		esi, TYPE DWORD					; advance all three pointers
- 0000010C  83 C7 04			add		edi, TYPE DWORD
- 0000010F  83 C3 04			add		ebx, TYPE DWORD
- 00000112  9D				popfd									; restore carry flag
- 00000113  E2 ED		loop L1 									; repeat the loop
- 00000115  C7 03 00000000		mov		DWORD PTR [ebx],0 				; clear high byte of difference
- 0000011B  83 1B 00			sbb		DWORD PTR [ebx],0 				; subtract any leftover carry
- 0000011E  61				popad
- 0000011F  C3				ret
- 00000120			Extended_Sub ENDP
+ 0000011B			L1:
+ 0000011B  8B 06			mov		eax,[esi]						; get the first integer
+ 0000011D  1B 07			sbb		eax,[edi]						; subtract the second integer
+ 0000011F  9C				pushfd									; save carry flag
+ 00000120  88 03			mov		[ebx],al						; store partial difference
+ 00000122  83 C6 04			add		esi, TYPE DWORD					; advance all three pointers
+ 00000125  83 C7 04			add		edi, TYPE DWORD
+ 00000128  83 C3 04			add		ebx, TYPE DWORD
+ 0000012B  9D				popfd									; restore carry flag
+ 0000012C  E2 ED		loop L1 									; repeat the loop
+ 0000012E  C7 03 00000000		mov		DWORD PTR [ebx],0 				; clear high byte of difference
+ 00000134  83 1B 00			sbb		DWORD PTR [ebx],0 				; subtract any leftover carry
+ 00000137  61				popad
+ 00000138  C3				ret
+ 00000139			Extended_Sub ENDP
 
 
 				;----------------------------------------------------------------
- 00000120			PackedToAsc PROC USES edx
+ 00000139			PackedToAsc PROC USES edx
 				;
 				; procedure that converts a 4-byte packed decimal number
 				; to a string of ASCII decimal digits
@@ -264,24 +279,24 @@ Microsoft (R) Macro Assembler Version 14.36.32534.0	    08/19/23 16:31:31
 				; Returns: String of ASCII digits in buffer pointed by EDX
 				;------------------------------------------------------------------
 
- 00000120  52		   *	    push   edx
- 00000121  B9 00000008			mov		ecx,8
- 00000126			L1:
- 00000126  C1 C0 04			rol		eax,4						; move high 4 bits to low 4 bits
- 00000129  8A D8			mov		bl,al						; 
- 0000012B  80 E3 0F			and		bl,0fh						; mask out low 4 bits in 8bit register
- 0000012E  80 CB 30			or		bl,30h						; convert packed BCD to ascii
- 00000131  88 1A			mov		BYTE PTR [edx],bl
- 00000133  42				inc		edx
+ 00000139  52		   *	    push   edx
+ 0000013A  B9 00000008			mov		ecx,8
+ 0000013F			L1:
+ 0000013F  C1 C0 04			rol		eax,4						; move high 4 bits to low 4 bits
+ 00000142  8A D8			mov		bl,al						; 
+ 00000144  80 E3 0F			and		bl,0fh						; mask out low 4 bits in 8bit register
+ 00000147  80 CB 30			or		bl,30h						; convert packed BCD to ascii
+ 0000014A  88 1A			mov		BYTE PTR [edx],bl
+ 0000014C  42				inc		edx
 
- 00000134  E2 F0			loop	L1
+ 0000014D  E2 F0			loop	L1
 					ret
- 00000136  5A		   *	    pop    edx
- 00000137  C3		   *	    ret    00000h
- 00000138			PackedToAsc ENDP
+ 0000014F  5A		   *	    pop    edx
+ 00000150  C3		   *	    ret    00000h
+ 00000151			PackedToAsc ENDP
 
 				;----------------------------------------------------------------
- 00000138			EncryptMsg	PROC USES ecx edx ebx esi
+ 00000151			EncryptMsg	PROC USES ecx edx ebx esi
 				;
 				; Encrypts a string using rotate insturctions
 				; 
@@ -289,45 +304,45 @@ Microsoft (R) Macro Assembler Version 14.36.32534.0	    08/19/23 16:31:31
 				; Returns: Encrypted string buffer pointed by EDX
 				;----------------------------------------------------------------
 
- 00000138  51		   *	    push   ecx
- 00000139  52		   *	    push   edx
- 0000013A  53		   *	    push   ebx
- 0000013B  56		   *	    push   esi
- 0000013C  BE 00000000			mov		esi,0
- 00000141			L1:
- 00000141  51				push	ecx
- 00000142  8A 0C 33			mov		cl,[ebx+esi]
- 00000145  80 F9 00			cmp		cl,0
- 00000148  7F 06			jg		ShiftRight
- 0000014A			ShiftLeft:
- 0000014A  F6 D9			neg		cl
- 0000014C  D2 02			rol		BYTE PTR[edx],cl
- 0000014E  EB 02			jmp		Continue
- 00000150			ShiftRight:
- 00000150  D2 0A			ror		BYTE PTR[edx],cl
+ 00000151  51		   *	    push   ecx
+ 00000152  52		   *	    push   edx
+ 00000153  53		   *	    push   ebx
+ 00000154  56		   *	    push   esi
+ 00000155  BE 00000000			mov		esi,0
+ 0000015A			L1:
+ 0000015A  51				push	ecx
+ 0000015B  8A 0C 33			mov		cl,[ebx+esi]
+ 0000015E  80 F9 00			cmp		cl,0
+ 00000161  7F 06			jg		ShiftRight
+ 00000163			ShiftLeft:
+ 00000163  F6 D9			neg		cl
+ 00000165  D2 02			rol		BYTE PTR[edx],cl
+ 00000167  EB 02			jmp		Continue
+ 00000169			ShiftRight:
+ 00000169  D2 0A			ror		BYTE PTR[edx],cl
 					
- 00000152			Continue:
- 00000152  42				inc		edx
+ 0000016B			Continue:
+ 0000016B  42				inc		edx
 					
 
- 00000153  46				inc		esi
- 00000154  83 FE 0A			cmp		esi,10
- 00000157  76 05			jbe		EndLoop
- 00000159  BE 00000000			mov		esi,0
- 0000015E			EndLoop: 
- 0000015E  59				pop		ecx
- 0000015F  E2 E0			loop	L1
+ 0000016C  46				inc		esi
+ 0000016D  83 FE 0A			cmp		esi,10
+ 00000170  76 05			jbe		EndLoop
+ 00000172  BE 00000000			mov		esi,0
+ 00000177			EndLoop: 
+ 00000177  59				pop		ecx
+ 00000178  E2 E0			loop	L1
 					ret
- 00000161  5E		   *	    pop    esi
- 00000162  5B		   *	    pop    ebx
- 00000163  5A		   *	    pop    edx
- 00000164  59		   *	    pop    ecx
- 00000165  C3		   *	    ret    00000h
- 00000166			EncryptMsg	ENDP
+ 0000017A  5E		   *	    pop    esi
+ 0000017B  5B		   *	    pop    ebx
+ 0000017C  5A		   *	    pop    edx
+ 0000017D  59		   *	    pop    ecx
+ 0000017E  C3		   *	    ret    00000h
+ 0000017F			EncryptMsg	ENDP
 
 
 				;----------------------------------------------------------------
- 00000166			GeneratePrimeNumbers	PROC USES eax ecx edx
+ 0000017F			GeneratePrimeNumbers	PROC USES eax ecx edx
 				;
 				; Generates prime numbers from 2 to 1000 using Sieve of Eratosthenes algorithm
 				; 
@@ -335,52 +350,52 @@ Microsoft (R) Macro Assembler Version 14.36.32534.0	    08/19/23 16:31:31
 				; Returns: Nothing
 				;----------------------------------------------------------------
 
- 00000166  50		   *	    push   eax
- 00000167  51		   *	    push   ecx
- 00000168  52		   *	    push   edx
- 00000169  B9 00000002			mov		ecx,2
- 0000016E			L1:	
- 0000016E  8B C1			mov		eax,ecx
- 00000170  F7 E1			mul		ecx							; multiply eax =ecx*eax = i*i
- 00000172  3D 000003E8			cmp		eax,N_PRIME					; i*i < N
- 00000177  77 10			ja		BeginPrint					; if not jump to printing part
- 00000179			L2:
- 00000179  C6 04 06 00			mov		BYTE PTR [esi+eax],0
+ 0000017F  50		   *	    push   eax
+ 00000180  51		   *	    push   ecx
+ 00000181  52		   *	    push   edx
+ 00000182  B9 00000002			mov		ecx,2
+ 00000187			L1:	
+ 00000187  8B C1			mov		eax,ecx
+ 00000189  F7 E1			mul		ecx							; multiply eax =ecx*eax = i*i
+ 0000018B  3D 000003E8			cmp		eax,N_PRIME					; i*i < N
+ 00000190  77 10			ja		BeginPrint					; if not jump to printing part
+ 00000192			L2:
+ 00000192  C6 04 06 00			mov		BYTE PTR [esi+eax],0
 					
- 0000017D  03 C1			add		eax,ecx
- 0000017F  3D 000003E8			cmp		eax,N_PRIME
- 00000184  76 F3			jbe		L2
+ 00000196  03 C1			add		eax,ecx
+ 00000198  3D 000003E8			cmp		eax,N_PRIME
+ 0000019D  76 F3			jbe		L2
 					
- 00000186  41				inc		ecx
- 00000187  EB E5			jmp		L1
+ 0000019F  41				inc		ecx
+ 000001A0  EB E5			jmp		L1
 
 					
 				;----------------------------------------
 				;	Print Prime Numbers
 
- 00000189			BeginPrint:
- 00000189  E8 00000000 E		call	Crlf
- 0000018E  B8 00000002			mov		eax,2
- 00000193			PrintLoop:
- 00000193  F6 04 06 01			test	BYTE PTR [esi+eax],1
- 00000197  74 0A			jz		Continue
- 00000199  E8 00000000 E		call	WriteDec
- 0000019E  E8 00000000 E		call	Crlf
- 000001A3			Continue:
- 000001A3  40				inc		eax
- 000001A4  3D 000003E8			cmp		eax,N_PRIME
- 000001A9  76 E8			jbe		PrintLoop
+ 000001A2			BeginPrint:
+ 000001A2  E8 00000000 E		call	Crlf
+ 000001A7  B8 00000002			mov		eax,2
+ 000001AC			PrintLoop:
+ 000001AC  F6 04 06 01			test	BYTE PTR [esi+eax],1
+ 000001B0  74 0A			jz		Continue
+ 000001B2  E8 00000000 E		call	WriteDec
+ 000001B7  E8 00000000 E		call	Crlf
+ 000001BC			Continue:
+ 000001BC  40				inc		eax
+ 000001BD  3D 000003E8			cmp		eax,N_PRIME
+ 000001C2  76 E8			jbe		PrintLoop
 					
 					ret
- 000001AB  5A		   *	    pop    edx
- 000001AC  59		   *	    pop    ecx
- 000001AD  58		   *	    pop    eax
- 000001AE  C3		   *	    ret    00000h
- 000001AF			GeneratePrimeNumbers	ENDP
+ 000001C4  5A		   *	    pop    edx
+ 000001C5  59		   *	    pop    ecx
+ 000001C6  58		   *	    pop    eax
+ 000001C7  C3		   *	    ret    00000h
+ 000001C8			GeneratePrimeNumbers	ENDP
 
 
 				;----------------------------------------------------------------
- 000001AF			GCD	PROC USES esi edi edx
+ 000001C8			GCD	PROC USES esi edi edx
 				;
 				; Find Greatest common divisor
 				; 
@@ -388,41 +403,41 @@ Microsoft (R) Macro Assembler Version 14.36.32534.0	    08/19/23 16:31:31
 				; Returns: EAX=gdc int
 				;----------------------------------------------------------------
 
- 000001AF  56		   *	    push   esi
- 000001B0  57		   *	    push   edi
- 000001B1  52		   *	    push   edx
- 000001B2  8B C6		    mov		eax,esi
- 000001B4  E8 00000022			call	Abs
- 000001B9  8B F0			mov		esi,eax
+ 000001C8  56		   *	    push   esi
+ 000001C9  57		   *	    push   edi
+ 000001CA  52		   *	    push   edx
+ 000001CB  8B C6		    mov		eax,esi
+ 000001CD  E8 00000022			call	Abs
+ 000001D2  8B F0			mov		esi,eax
 
- 000001BB  8B C7			mov		eax,edi
- 000001BD  E8 00000019			call	Abs
- 000001C2  8B F8			mov		edi,eax
+ 000001D4  8B C7			mov		eax,edi
+ 000001D6  E8 00000019			call	Abs
+ 000001DB  8B F8			mov		edi,eax
 
 
- 000001C4			L1:
- 000001C4  83 FF 00			cmp		edi,0
- 000001C7  7E 0C			jle		EndLoop				; if y <= 0 ; exit
+ 000001DD			L1:
+ 000001DD  83 FF 00			cmp		edi,0
+ 000001E0  7E 0C			jle		EndLoop				; if y <= 0 ; exit
 
- 000001C9  8B C6			mov		eax,esi
- 000001CB  33 D2			xor		edx,edx				; clear edx
- 000001CD  F7 F7			div		edi					; x / y
+ 000001E2  8B C6			mov		eax,esi
+ 000001E4  33 D2			xor		edx,edx				; clear edx
+ 000001E6  F7 F7			div		edi					; x / y
 					
- 000001CF  8B F7			mov		esi,edi				; x = y
- 000001D1  8B FA			mov		edi,edx				; y = remainder
- 000001D3  EB EF			jmp		L1
- 000001D5			EndLoop:	
+ 000001E8  8B F7			mov		esi,edi				; x = y
+ 000001EA  8B FA			mov		edi,edx				; y = remainder
+ 000001EC  EB EF			jmp		L1
+ 000001EE			EndLoop:	
 					
- 000001D5  8B C6			mov		eax,esi
+ 000001EE  8B C6			mov		eax,esi
 					ret
- 000001D7  5A		   *	    pop    edx
- 000001D8  5F		   *	    pop    edi
- 000001D9  5E		   *	    pop    esi
- 000001DA  C3		   *	    ret    00000h
- 000001DB			GCD	ENDP
+ 000001F0  5A		   *	    pop    edx
+ 000001F1  5F		   *	    pop    edi
+ 000001F2  5E		   *	    pop    esi
+ 000001F3  C3		   *	    ret    00000h
+ 000001F4			GCD	ENDP
 
 				;----------------------------------------------------------------
- 000001DB			Abs	PROC USES edx
+ 000001F4			Abs	PROC USES edx
 				;
 				; Find absolute value in the eax register
 				; 
@@ -430,15 +445,15 @@ Microsoft (R) Macro Assembler Version 14.36.32534.0	    08/19/23 16:31:31
 				; Returns: EAX=abs value
 				;----------------------------------------------------------------
 
- 000001DB  52		   *	    push   edx
- 000001DC  8B D0		    mov     edx, eax        ; Copy the number to edx
- 000001DE  C1 FA 1F		    sar     edx, 31         ; Shift sign bit of edx to the rightmost bit
+ 000001F4  52		   *	    push   edx
+ 000001F5  8B D0		    mov     edx, eax        ; Copy the number to edx
+ 000001F7  C1 FA 1F		    sar     edx, 31         ; Shift sign bit of edx to the rightmost bit
 
- 000001E1  33 C2		    xor     eax, edx        ; XOR the number with the sign extension
- 000001E3  2B C2		    sub     eax, edx        ; Subtract the sign extension
+ 000001FA  33 C2		    xor     eax, edx        ; XOR the number with the sign extension
+ 000001FC  2B C2		    sub     eax, edx        ; Subtract the sign extension
 					ret
- 000001E5  5A		   *	    pop    edx
- 000001E6  C3		   *	    ret    00000h
+ 000001FE  5A		   *	    pop    edx
+ 000001FF  C3		   *	    ret    00000h
 
 				COMMENT !
 					;----------------------------
@@ -453,11 +468,11 @@ Microsoft (R) Macro Assembler Version 14.36.32534.0	    08/19/23 16:31:31
 					xor     eax, edx
 					sub     eax, edx
 				!
- 000001E7			Abs	ENDP
+ 00000200			Abs	ENDP
 
 				; My version (Naive)
 				;----------------------------------------------------------------
- 000001E7			BitwiseMultiply	PROC USES ebx ecx esi edi
+ 00000200			BitwiseMultiply	PROC USES ebx ecx esi edi
 				;
 				; Multiply EAX with EDX and store the result in EAX
 				; using bitwise multiply method
@@ -465,107 +480,107 @@ Microsoft (R) Macro Assembler Version 14.36.32534.0	    08/19/23 16:31:31
 				; Receives: EAX=unsigned int, EBX=unsigned int
 				; Returns: EAX=result
 				;----------------------------------------------------------------
- 000001E7  53		   *	    push   ebx
- 000001E8  51		   *	    push   ecx
- 000001E9  56		   *	    push   esi
- 000001EA  57		   *	    push   edi
- 000001EB  8B F8			mov edi,eax
- 000001ED  B8 00000000			mov	eax,0
- 000001F2			BegLoop:
- 000001F2  83 FB 00			cmp	ebx,0
- 000001F5  74 1D			jz	EndProc
+ 00000200  53		   *	    push   ebx
+ 00000201  51		   *	    push   ecx
+ 00000202  56		   *	    push   esi
+ 00000203  57		   *	    push   edi
+ 00000204  8B F8			mov edi,eax
+ 00000206  B8 00000000			mov	eax,0
+ 0000020B			BegLoop:
+ 0000020B  83 FB 00			cmp	ebx,0
+ 0000020E  74 1D			jz	EndProc
 
- 000001F7  B1 00			mov	cl,0
- 000001F9  BA 00000001			mov edx,1
- 000001FE			L1:
- 000001FE  D1 E2			shl	edx,1
- 00000200  FE C1			inc	cl
- 00000202  3B D3			cmp	edx,ebx
- 00000204  72 F8			jb	L1
+ 00000210  B1 00			mov	cl,0
+ 00000212  BA 00000001			mov edx,1
+ 00000217			L1:
+ 00000217  D1 E2			shl	edx,1
+ 00000219  FE C1			inc	cl
+ 0000021B  3B D3			cmp	edx,ebx
+ 0000021D  72 F8			jb	L1
 				;---------------------
- 00000206  FE C9			dec cl
- 00000208  D1 EA			shr edx,1
+ 0000021F  FE C9			dec cl
+ 00000221  D1 EA			shr edx,1
 
- 0000020A  2B DA			sub	ebx,edx
+ 00000223  2B DA			sub	ebx,edx
 					
- 0000020C  8B F7			mov	esi,edi
- 0000020E  D3 E6			shl	esi,cl
+ 00000225  8B F7			mov	esi,edi
+ 00000227  D3 E6			shl	esi,cl
 
- 00000210  03 C6			add	eax,esi
+ 00000229  03 C6			add	eax,esi
 
- 00000212  EB DE			jmp	BegLoop
+ 0000022B  EB DE			jmp	BegLoop
 
- 00000214			EndProc:
+ 0000022D			EndProc:
 					ret
- 00000214  5F		   *	    pop    edi
- 00000215  5E		   *	    pop    esi
- 00000216  59		   *	    pop    ecx
- 00000217  5B		   *	    pop    ebx
- 00000218  C3		   *	    ret    00000h
- 00000219			BitwiseMultiply	ENDP
+ 0000022D  5F		   *	    pop    edi
+ 0000022E  5E		   *	    pop    esi
+ 0000022F  59		   *	    pop    ecx
+ 00000230  5B		   *	    pop    ebx
+ 00000231  C3		   *	    ret    00000h
+ 00000232			BitwiseMultiply	ENDP
 
 
 
 				; https://stackoverflow.com/questions/26305068/how-do-i-perform-bitwise-multiplication-division-in-masm-x86-assembly
 				; Multiply EBX by EAX
- 00000219			BitwiseMultiply2 PROC USES EBX ECX EDX
- 00000219  53		   *	    push   ebx
- 0000021A  51		   *	    push   ecx
- 0000021B  52		   *	    push   edx
- 0000021C  8B D0		    mov edx, eax            ; EDX: multiplier (EBX: multiplicand)
- 0000021E  33 C0		    xor eax, eax            ; Result will be in EAX - clear it
- 00000220  0F BD CA		    bsr ecx, edx            ; ECX = position of the most significant bit
- 00000223  74 0D		    jz R1                   ; Return with EAX=0 if EDX == 0
+ 00000232			BitwiseMultiply2 PROC USES EBX ECX EDX
+ 00000232  53		   *	    push   ebx
+ 00000233  51		   *	    push   ecx
+ 00000234  52		   *	    push   edx
+ 00000235  8B D0		    mov edx, eax            ; EDX: multiplier (EBX: multiplicand)
+ 00000237  33 C0		    xor eax, eax            ; Result will be in EAX - clear it
+ 00000239  0F BD CA		    bsr ecx, edx            ; ECX = position of the most significant bit
+ 0000023C  74 0D		    jz R1                   ; Return with EAX=0 if EDX == 0
 
- 00000225			    L1:
- 00000225  D1 EA		    shr edx, 1              ; Look at the rightmost bit of the multiplier
- 00000227  73 02		    jnc @F                  ; Skip addition if this bit == 0
- 00000229  03 C3		    add eax, ebx            ; Add multiplikand to result
- 0000022B			    @@:
- 0000022B  D1 E3		    shl ebx, 1              ; Increase multipland for the next round
- 0000022D  83 E9 01		    sub ecx, 1              ; Decrease loop variable
- 00000230  73 F3		    jnc L1                  ; Loop if ECX >= 0
+ 0000023E			    L1:
+ 0000023E  D1 EA		    shr edx, 1              ; Look at the rightmost bit of the multiplier
+ 00000240  73 02		    jnc @F                  ; Skip addition if this bit == 0
+ 00000242  03 C3		    add eax, ebx            ; Add multiplikand to result
+ 00000244			    @@:
+ 00000244  D1 E3		    shl ebx, 1              ; Increase multipland for the next round
+ 00000246  83 E9 01		    sub ecx, 1              ; Decrease loop variable
+ 00000249  73 F3		    jnc L1                  ; Loop if ECX >= 0
 
- 00000232			    R1:
+ 0000024B			    R1:
 				    ret                     ; Result in EAX
- 00000232  5A		   *	    pop    edx
- 00000233  59		   *	    pop    ecx
- 00000234  5B		   *	    pop    ebx
- 00000235  C3		   *	    ret    00000h
- 00000236			BitwiseMultiply2 ENDP
+ 0000024B  5A		   *	    pop    edx
+ 0000024C  59		   *	    pop    ecx
+ 0000024D  5B		   *	    pop    ebx
+ 0000024E  C3		   *	    ret    00000h
+ 0000024F			BitwiseMultiply2 ENDP
 
 				; Divide EAX by EBX
- 00000236			BitwiseDivide PROC USES ECX EDX ESI
- 00000236  51		   *	    push   ecx
- 00000237  52		   *	    push   edx
- 00000238  56		   *	    push   esi
- 00000239  8B F0		    mov esi, eax            ; ESI: dividend (EBX: divisor)
- 0000023B  33 C0		    xor eax, eax            ; Result (quotient) = 0
- 0000023D  33 D2		    xor edx, edx            ; EDX = 0 (start value)
- 0000023F  B1 20		    mov cl, 32              ; 32 loops
+ 0000024F			BitwiseDivide PROC USES ECX EDX ESI
+ 0000024F  51		   *	    push   ecx
+ 00000250  52		   *	    push   edx
+ 00000251  56		   *	    push   esi
+ 00000252  8B F0		    mov esi, eax            ; ESI: dividend (EBX: divisor)
+ 00000254  33 C0		    xor eax, eax            ; Result (quotient) = 0
+ 00000256  33 D2		    xor edx, edx            ; EDX = 0 (start value)
+ 00000258  B1 20		    mov cl, 32              ; 32 loops
 
- 00000241			    L1:
- 00000241  D1 E6		    shl esi, 1              ; Bit 31 from EAX ...
- 00000243  D1 D2		    rcl edx, 1              ;     ... to Bit 1 of EDX
- 00000245  3B DA		    cmp ebx, edx            ; Carry, if EDX > Divisor
- 00000247  77 03		    ja @F                   ; Skip subtraction if carry==0 and zero==0 (result not zero)
- 00000249  2B D3		    sub edx, ebx            ; Subtract ...
- 0000024B  F9			    stc                     ;     ... and set carry
- 0000024C			    @@:
- 0000024C  D1 D0		    rcl eax, 1              ; Append carry (0 or 1) to quotient.
- 0000024E  80 E9 01		    sub cl, 1
- 00000251  75 EE		    jnz L1                  ; loop while CL > 0
+ 0000025A			    L1:
+ 0000025A  D1 E6		    shl esi, 1              ; Bit 31 from EAX ...
+ 0000025C  D1 D2		    rcl edx, 1              ;     ... to Bit 1 of EDX
+ 0000025E  3B DA		    cmp ebx, edx            ; Carry, if EDX > Divisor
+ 00000260  77 03		    ja @F                   ; Skip subtraction if carry==0 and zero==0 (result not zero)
+ 00000262  2B D3		    sub edx, ebx            ; Subtract ...
+ 00000264  F9			    stc                     ;     ... and set carry
+ 00000265			    @@:
+ 00000265  D1 D0		    rcl eax, 1              ; Append carry (0 or 1) to quotient.
+ 00000267  80 E9 01		    sub cl, 1
+ 0000026A  75 EE		    jnz L1                  ; loop while CL > 0
 
 				    ret                     ; Result in EAX
- 00000253  5E		   *	    pop    esi
- 00000254  5A		   *	    pop    edx
- 00000255  59		   *	    pop    ecx
- 00000256  C3		   *	    ret    00000h
- 00000257			BitwiseDivide ENDP
+ 0000026C  5E		   *	    pop    esi
+ 0000026D  5A		   *	    pop    edx
+ 0000026E  59		   *	    pop    ecx
+ 0000026F  C3		   *	    ret    00000h
+ 00000270			BitwiseDivide ENDP
 
 
 				;----------------------------------------------------------------
- 00000257			AddPacked	PROC
+ 00000270			AddPacked	PROC
 				;
 				; Add two packed decimal interger of arbitrary size
 				; 
@@ -575,42 +590,42 @@ Microsoft (R) Macro Assembler Version 14.36.32534.0	    08/19/23 16:31:31
 				;----------------------------------------------------------------
 
 					
- 00000257  F8				clc						; clear carry
- 00000258  33 DB			xor ebx,ebx
- 0000025A			L1:
- 0000025A  8A 04 1E			mov al,BYTE PTR [esi+ebx]
- 0000025D  12 04 1F			adc	al,BYTE PTR [edi+ebx]
- 00000260  27				daa
- 00000261  88 04 1A			mov	BYTE PTR [edx+ebx],al
- 00000264  43				inc ebx
- 00000265  E2 F3			loop L1
+ 00000270  F8				clc						; clear carry
+ 00000271  33 DB			xor ebx,ebx
+ 00000273			L1:
+ 00000273  8A 04 1E			mov al,BYTE PTR [esi+ebx]
+ 00000276  12 04 1F			adc	al,BYTE PTR [edi+ebx]
+ 00000279  27				daa
+ 0000027A  88 04 1A			mov	BYTE PTR [edx+ebx],al
+ 0000027D  43				inc ebx
+ 0000027E  E2 F3			loop L1
 
- 00000267  80 14 1A 00			adc BYTE PTR [edx+ebx],0
- 0000026B  27				daa
+ 00000280  80 14 1A 00			adc BYTE PTR [edx+ebx],0
+ 00000284  27				daa
 
 					;----------------------------------------
-					;	Printing 17 byte result
+					;	Print 17 byte result
 
- 0000026C  33 C0			xor eax,eax
- 0000026E  8A 42 10			mov	al, BYTE PTR [edx+16]
- 00000271  E8 00000000 E		call WriteHex
+ 00000285  33 C0			xor eax,eax
+ 00000287  8A 42 10			mov	al, BYTE PTR [edx+16]
+ 0000028A  E8 00000000 E		call WriteHex
 
- 00000276  8B 42 0C			mov	eax, DWORD PTR [edx+12]
- 00000279  E8 00000000 E		call WriteHex
+ 0000028F  8B 42 0C			mov	eax, DWORD PTR [edx+12]
+ 00000292  E8 00000000 E		call WriteHex
 
- 0000027E  8B 42 08			mov	eax, DWORD PTR [edx+8]
- 00000281  E8 00000000 E		call WriteHex
+ 00000297  8B 42 08			mov	eax, DWORD PTR [edx+8]
+ 0000029A  E8 00000000 E		call WriteHex
 
- 00000286  8B 42 04			mov	eax, DWORD PTR [edx+4]
- 00000289  E8 00000000 E		call WriteHex
+ 0000029F  8B 42 04			mov	eax, DWORD PTR [edx+4]
+ 000002A2  E8 00000000 E		call WriteHex
 
- 0000028E  8B 02			mov	eax, DWORD PTR [edx]
- 00000290  E8 00000000 E		call WriteHex
- 00000295  C3				ret
- 00000296			AddPacked	ENDP
+ 000002A7  8B 02			mov	eax, DWORD PTR [edx]
+ 000002A9  E8 00000000 E		call WriteHex
+ 000002AE  C3				ret
+ 000002AF			AddPacked	ENDP
 
 				END main
-Microsoft (R) Macro Assembler Version 14.36.32534.0	    08/19/23 16:31:31
+Microsoft (R) Macro Assembler Version 14.36.32534.0	    10/23/23 14:26:28
 7_10_Programming_Exercises.asm				     Symbols 2 - 1
 
 
@@ -705,25 +720,25 @@ Segments and Groups:
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
 _DATA  . . . . . . . . . . . . .	32 Bit	 000004B0 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 00000296 Para	  Public  'CODE'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 000002AF Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
 
                 N a m e                 Type     Value    Attr
 
-Abs  . . . . . . . . . . . . . .	P Near	 000001DB _TEXT	Length= 0000000C Public STDCALL
-AddPacked  . . . . . . . . . . .	P Near	 00000257 _TEXT	Length= 0000003F Public STDCALL
+Abs  . . . . . . . . . . . . . .	P Near	 000001F4 _TEXT	Length= 0000000C Public STDCALL
+AddPacked  . . . . . . . . . . .	P Near	 00000270 _TEXT	Length= 0000003F Public STDCALL
+  L1 . . . . . . . . . . . . . .	L Near	 00000273 _TEXT	
+BitwiseDivide  . . . . . . . . .	P Near	 0000024F _TEXT	Length= 00000021 Public STDCALL
   L1 . . . . . . . . . . . . . .	L Near	 0000025A _TEXT	
-BitwiseDivide  . . . . . . . . .	P Near	 00000236 _TEXT	Length= 00000021 Public STDCALL
-  L1 . . . . . . . . . . . . . .	L Near	 00000241 _TEXT	
-BitwiseMultiply2 . . . . . . . .	P Near	 00000219 _TEXT	Length= 0000001D Public STDCALL
-  L1 . . . . . . . . . . . . . .	L Near	 00000225 _TEXT	
-  R1 . . . . . . . . . . . . . .	L Near	 00000232 _TEXT	
-BitwiseMultiply  . . . . . . . .	P Near	 000001E7 _TEXT	Length= 00000032 Public STDCALL
-  BegLoop  . . . . . . . . . . .	L Near	 000001F2 _TEXT	
-  L1 . . . . . . . . . . . . . .	L Near	 000001FE _TEXT	
-  EndProc  . . . . . . . . . . .	L Near	 00000214 _TEXT	
+BitwiseMultiply2 . . . . . . . .	P Near	 00000232 _TEXT	Length= 0000001D Public STDCALL
+  L1 . . . . . . . . . . . . . .	L Near	 0000023E _TEXT	
+  R1 . . . . . . . . . . . . . .	L Near	 0000024B _TEXT	
+BitwiseMultiply  . . . . . . . .	P Near	 00000200 _TEXT	Length= 00000032 Public STDCALL
+  BegLoop  . . . . . . . . . . .	L Near	 0000020B _TEXT	
+  L1 . . . . . . . . . . . . . .	L Near	 00000217 _TEXT	
+  EndProc  . . . . . . . . . . .	L Near	 0000022D _TEXT	
 CloseFile  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 CloseHandle  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 Clrscr . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
@@ -733,28 +748,28 @@ Crlf . . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 Delay  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 DumpMem  . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 DumpRegs . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-EncryptMsg . . . . . . . . . . .	P Near	 00000138 _TEXT	Length= 0000002E Public STDCALL
-  L1 . . . . . . . . . . . . . .	L Near	 00000141 _TEXT	
-  ShiftLeft  . . . . . . . . . .	L Near	 0000014A _TEXT	
-  ShiftRight . . . . . . . . . .	L Near	 00000150 _TEXT	
-  Continue . . . . . . . . . . .	L Near	 00000152 _TEXT	
-  EndLoop  . . . . . . . . . . .	L Near	 0000015E _TEXT	
+EncryptMsg . . . . . . . . . . .	P Near	 00000151 _TEXT	Length= 0000002E Public STDCALL
+  L1 . . . . . . . . . . . . . .	L Near	 0000015A _TEXT	
+  ShiftLeft  . . . . . . . . . .	L Near	 00000163 _TEXT	
+  ShiftRight . . . . . . . . . .	L Near	 00000169 _TEXT	
+  Continue . . . . . . . . . . .	L Near	 0000016B _TEXT	
+  EndLoop  . . . . . . . . . . .	L Near	 00000177 _TEXT	
 ExitProcess  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-Extended_Sub . . . . . . . . . .	P Near	 00000100 _TEXT	Length= 00000020 Public STDCALL
-  L1 . . . . . . . . . . . . . .	L Near	 00000102 _TEXT	
+Extended_Sub . . . . . . . . . .	P Near	 00000119 _TEXT	Length= 00000020 Public STDCALL
+  L1 . . . . . . . . . . . . . .	L Near	 0000011B _TEXT	
 FileTimeToDosDateTime  . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 FileTimeToSystemTime . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 FlushConsoleInputBuffer  . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 FormatMessageA . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-GCD  . . . . . . . . . . . . . .	P Near	 000001AF _TEXT	Length= 0000002C Public STDCALL
-  L1 . . . . . . . . . . . . . .	L Near	 000001C4 _TEXT	
-  EndLoop  . . . . . . . . . . .	L Near	 000001D5 _TEXT	
-GeneratePrimeNumbers . . . . . .	P Near	 00000166 _TEXT	Length= 00000049 Public STDCALL
-  L1 . . . . . . . . . . . . . .	L Near	 0000016E _TEXT	
-  L2 . . . . . . . . . . . . . .	L Near	 00000179 _TEXT	
-  BeginPrint . . . . . . . . . .	L Near	 00000189 _TEXT	
-  PrintLoop  . . . . . . . . . .	L Near	 00000193 _TEXT	
-  Continue . . . . . . . . . . .	L Near	 000001A3 _TEXT	
+GCD  . . . . . . . . . . . . . .	P Near	 000001C8 _TEXT	Length= 0000002C Public STDCALL
+  L1 . . . . . . . . . . . . . .	L Near	 000001DD _TEXT	
+  EndLoop  . . . . . . . . . . .	L Near	 000001EE _TEXT	
+GeneratePrimeNumbers . . . . . .	P Near	 0000017F _TEXT	Length= 00000049 Public STDCALL
+  L1 . . . . . . . . . . . . . .	L Near	 00000187 _TEXT	
+  L2 . . . . . . . . . . . . . .	L Near	 00000192 _TEXT	
+  BeginPrint . . . . . . . . . .	L Near	 000001A2 _TEXT	
+  PrintLoop  . . . . . . . . . .	L Near	 000001AC _TEXT	
+  Continue . . . . . . . . . . .	L Near	 000001BC _TEXT	
 GetCommandLineA  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 GetCommandTail . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 GetConsoleCP . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
@@ -786,8 +801,8 @@ MessageBoxA  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 MsgBoxAsk  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 MsgBox . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 OpenInputFile  . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-PackedToAsc  . . . . . . . . . .	P Near	 00000120 _TEXT	Length= 00000018 Public STDCALL
-  L1 . . . . . . . . . . . . . .	L Near	 00000126 _TEXT	
+PackedToAsc  . . . . . . . . . .	P Near	 00000139 _TEXT	Length= 00000018 Public STDCALL
+  L1 . . . . . . . . . . . . . .	L Near	 0000013F _TEXT	
 ParseDecimal32 . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 ParseInteger32 . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 PeekConsoleInputA  . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
@@ -838,13 +853,13 @@ WriteFloat . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteHexB  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteHex . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteInt . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-WriteScaled  . . . . . . . . . .	P Near	 000000D9 _TEXT	Length= 00000027 Public STDCALL
+WriteScaled  . . . . . . . . . .	P Near	 000000F2 _TEXT	Length= 00000027 Public STDCALL
 WriteStackFrameName  . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 000000D9 Public STDCALL
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 000000F2 Public STDCALL
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
