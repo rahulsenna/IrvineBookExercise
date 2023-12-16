@@ -10,7 +10,7 @@ GCD		PROC,
 	A:DWORD,
 	B:DWORD
 ;
-; Find GCD using Euclid’s algorithm
+; Find GCD using Euclid's algorithm
 ; Returns: EAX = result
 ;-----------------------------------------------------
 	cmp		A,0

@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <MASM Include="8_11_Programming_Exercises\ShowParams.asm" />
+    <MASM Include="9_10_Programming_Exercises\LetterMatrixSets.asm" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
