@@ -17,9 +17,4 @@
       <UniqueIdentifier>{5de9a734-c478-4ef6-bd01-cf2bc5cc618d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
-  <ItemGroup>
-    <MASM Include="9_10_Programming_Exercises\LetterMatrixSets.asm">
-      <Filter>Source Files</Filter>
-    </MASM>
-  </ItemGroup>
 </Project>

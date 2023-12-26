@@ -18,9 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <MASM Include="9_10_Programming_Exercises\LetterMatrixSets.asm" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -75,18 +72,20 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ExternalIncludePath>$(USERPROFILE)\Desktop\Irvine;$(ExternalIncludePath)</ExternalIncludePath>
+    <ExternalIncludePath>$(USERPROFILE)\Desktop\Irvine;$(ExternalIncludePath);</ExternalIncludePath>
     <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(USERPROFILE)\Desktop\Irvine;</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ExternalIncludePath>$(USERPROFILE)\Desktop\Irvine;$(ExternalIncludePath)</ExternalIncludePath>
+    <ExternalIncludePath>$(USERPROFILE)\Desktop\Irvine;$(ExternalIncludePath);</ExternalIncludePath>
     <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(USERPROFILE)\Desktop\Irvine;</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ExternalIncludePath>$(USERPROFILE)\Desktop\Irvine;$(ExternalIncludePath)</ExternalIncludePath>
+    <ExternalIncludePath>$(USERPROFILE)\Desktop\Irvine;$(ExternalIncludePath);</ExternalIncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(USERPROFILE)\Desktop\Irvine;</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <ExternalIncludePath>$(USERPROFILE)\Desktop\Irvine;$(ExternalIncludePath)</ExternalIncludePath>
+    <ExternalIncludePath>$(USERPROFILE)\Desktop\Irvine;$(ExternalIncludePath);</ExternalIncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(USERPROFILE)\Desktop\Irvine;</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
